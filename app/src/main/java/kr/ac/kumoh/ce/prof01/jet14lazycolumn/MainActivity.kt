@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -44,26 +45,33 @@ fun MainScreen() {
 
 @Composable
 fun SongList() {
+    val songs = listOf(
+        "사랑은 늘 도망가",
+        "소주 한 잔",
+        "화장을 고치고",
+        "멀어져 간 사람아",
+    )
+
    LazyColumn(
        verticalArrangement = Arrangement.spacedBy(4.dp),
        contentPadding = PaddingValues(horizontal = 4.dp)
    ) {
-       items(30) {
+       items(songs) {
            SongItem(it)
        }
    }
 }
 
 @Composable
-fun SongItem(index: Int) {
+fun SongItem(title: String) {
     Column(
         Modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.tertiaryContainer)
             .padding(8.dp)
     ) {
-        SongTitle("노래 $index")
-        SingerName("이 노래를 부른 가수는 $index 입니다")
+        SongTitle(title)
+        SingerName("$title 노래를 부른 가수는 누구 일까요?")
     }
 }
 
