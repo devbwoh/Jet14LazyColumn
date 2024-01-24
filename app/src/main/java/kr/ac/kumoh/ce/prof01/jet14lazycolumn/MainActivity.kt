@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -44,22 +45,30 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
+    val viewModel: SongViewModel = viewModel()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        SongList()
+        Column {
+            Button(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+                onClick = {
+                    viewModel.add(Song("한 장의 추억", "쿨"))
+                }
+            ) {
+                Text("노래 추가")
+            }
+            SongList()
+        }
     }
 }
 
 @Composable
 fun SongList() {
-//    val songs = listOf(
-//        "사랑은 늘 도망가",
-//        "소주 한 잔",
-//        "화장을 고치고",
-//        "멀어져 간 사람아",
-//    )
     val viewModel: SongViewModel = viewModel()
 
    LazyColumn(
